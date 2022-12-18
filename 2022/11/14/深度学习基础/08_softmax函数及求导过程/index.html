@@ -16,26 +16,38 @@
   <meta name="author" content="孔言">
   <meta name="keywords" content="">
   
-    <meta name="description" content="问题在笔试问答题或面试中偶尔有涉及到激活函数的问题，这里简单总结一下深度学习中常见的三种激活函数sigmoid、tanh和ReLU，以及它们各自的特点和用途。 激活函数激活函数的作用是什么？激活函数的主要作用是在神经网络中引入非线性因素。 优秀激活函数具备的特性 非线性 可微 基于梯度优化必备特性 单调性  激活函数单调保证单层网络是凸函数，凸函数的局部最优解即为全局最优 计算简单 减少计算资源">
+    <meta name="description" content="问题今天小伙伴问会不会梯度求导，发现自己对离散变量求导并不熟悉，所以以somafmax为例子复习下，再进阶其实了解计算图了。 softmax函数softmax用于多分类过程中，它将多个神经元的输出，映射到（0,1）区间内，可以看成概率来理解，从而来进行多分类！ 假设我们有一个数组$Z$，$Z_i$表示$Z$中的第i个元素，那么这个元素的softmax值就是: ​">
 <meta property="og:type" content="article">
-<meta property="og:title" content="01—三种常见激活函数">
-<meta property="og:url" content="https://kongyan66.github.io/2022/12/06/%E4%B8%89%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:title" content="08-softmax函数求导过程">
+<meta property="og:url" content="https://kongyan66.github.io/2022/11/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/08_softmax%E5%87%BD%E6%95%B0%E5%8F%8A%E6%B1%82%E5%AF%BC%E8%BF%87%E7%A8%8B/index.html">
 <meta property="og:site_name" content="孔言的博客">
-<meta property="og:description" content="问题在笔试问答题或面试中偶尔有涉及到激活函数的问题，这里简单总结一下深度学习中常见的三种激活函数sigmoid、tanh和ReLU，以及它们各自的特点和用途。 激活函数激活函数的作用是什么？激活函数的主要作用是在神经网络中引入非线性因素。 优秀激活函数具备的特性 非线性 可微 基于梯度优化必备特性 单调性  激活函数单调保证单层网络是凸函数，凸函数的局部最优解即为全局最优 计算简单 减少计算资源">
+<meta property="og:description" content="问题今天小伙伴问会不会梯度求导，发现自己对离散变量求导并不熟悉，所以以somafmax为例子复习下，再进阶其实了解计算图了。 softmax函数softmax用于多分类过程中，它将多个神经元的输出，映射到（0,1）区间内，可以看成概率来理解，从而来进行多分类！ 假设我们有一个数组$Z$，$Z_i$表示$Z$中的第i个元素，那么这个元素的softmax值就是: ​">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://i.loli.net/2020/06/08/HIX7TKyU2MsqlbV.png">
-<meta property="og:image" content="https://i.loli.net/2020/06/08/9DEFnfop1qmNM7T.png">
-<meta property="og:image" content="https://i.loli.net/2020/06/08/Nc2aBh3O5pEdk4Y.png">
-<meta property="article:published_time" content="2022-12-06T03:24:17.000Z">
-<meta property="article:modified_time" content="2022-12-06T03:27:36.979Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/v2-11758fbc2fc5bbbc60106926625b3a4f_r.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/20210314234609710.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/20210314234624842.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/202103142348336.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/20210314234638888.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/20210314234716409.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210314234716410.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/image-20220904170229139.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210314234716414.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/20210314234716422.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210314234821859.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/2021031423530680.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/20210314235316498.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/image-20220904172123950.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/image-20220904174600623.png">
+<meta property="article:published_time" content="2022-11-14T12:24:17.000Z">
+<meta property="article:modified_time" content="2022-12-18T13:08:18.078Z">
 <meta property="article:author" content="孔言">
 <meta property="article:tag" content="转载">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://i.loli.net/2020/06/08/HIX7TKyU2MsqlbV.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/v2-11758fbc2fc5bbbc60106926625b3a4f_r.jpg">
   
   
   
-  <title>01—三种常见激活函数 - 孔言的博客</title>
+  <title>08-softmax函数求导过程 - 孔言的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -218,7 +230,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="01—三种常见激活函数"></span>
+            <span id="subtitle" data-typed-text="08-softmax函数求导过程"></span>
           
         </div>
 
@@ -229,8 +241,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-12-06 11:24" pubdate>
-          2022年12月6日 上午
+        <time datetime="2022-11-14 20:24" pubdate>
+          2022年11月14日 晚上
         </time>
       </span>
     
@@ -241,7 +253,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          1.4k 字
         
       </span>
     
@@ -252,7 +264,7 @@
         
         
         
-          13 分钟
+          12 分钟
         
       </span>
     
@@ -298,82 +310,48 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">01—三种常见激活函数</h1>
+            <h1 style="display: none">08-softmax函数求导过程</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>在笔试问答题或面试中<strong>偶尔</strong>有涉及到激活函数的问题，这里简单总结一下深度学习中常见的三种激活函数sigmoid、tanh和ReLU，以及它们各自的特点和用途。</p>
-<h2 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h2><h3 id="激活函数的作用是什么？"><a href="#激活函数的作用是什么？" class="headerlink" title="激活函数的作用是什么？"></a>激活函数的作用是什么？</h3><p>激活函数的主要作用是在神经网络中<strong>引入非线性因素</strong>。</p>
-<h3 id="优秀激活函数具备的特性"><a href="#优秀激活函数具备的特性" class="headerlink" title="优秀激活函数具备的特性"></a>优秀激活函数具备的特性</h3><ul>
-<li><strong>非线性</strong></li>
-<li><strong>可微</strong> 基于梯度优化必备特性</li>
-<li><strong>单调性</strong>  激活函数单调保证单层网络是凸函数，凸函数的局部最优解即为全局最优</li>
-<li><strong>计算简单</strong> 减少计算资源</li>
-<li><strong>非饱和性</strong> 饱和区导数近乎为0，易出现梯度消失现象</li>
-<li><strong>值域</strong>  有限，优化稳定些；无限，训练高效，但学习率要小点</li>
-</ul>
-<h3 id="常见的三种激活函数"><a href="#常见的三种激活函数" class="headerlink" title="常见的三种激活函数"></a>常见的三种激活函数</h3><table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">sigmoid</th>
-<th align="center">tanh</th>
-<th align="center">ReLU</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">公式</td>
-<td align="center">$f(x)=\frac{1}{1+e^{-x}}$</td>
-<td align="center">$f(x)=\frac{e^x-e^{-x}}{e^x+e^{-x}}$</td>
-<td align="center">$f(x)=max(0,x)$</td>
-</tr>
-<tr>
-<td align="center">导数</td>
-<td align="center">$f’(x)=f(x)(1-f(x))$</td>
-<td align="center">$f’(x)=1-f^2(x)$</td>
-<td align="center">$f’(x)=\begin{cases}1,x&gt;0\0,x\leq0\end{cases}$</td>
-</tr>
-<tr>
-<td align="center">梯度消失</td>
-<td align="center">容易造成</td>
-<td align="center">也容易造成，但优于sigmoid</td>
-<td align="center">可以减缓，优于前两者</td>
-</tr>
-<tr>
-<td align="center">常见应用</td>
-<td align="center">二分类任务</td>
-<td align="center"><strong>RNN网络</strong></td>
-<td align="center">CNN网络</td>
-</tr>
-<tr>
-<td align="center">优点</td>
-<td align="center">函数平滑，容易求导</td>
-<td align="center">①函数平滑，容易求导<br>②输出关于零点对称</td>
-<td align="center">①求导更快，收敛更快   <br>②有效缓解了梯度消失问题<br>③增加网络的稀疏性</td>
-</tr>
-<tr>
-<td align="center">缺点</td>
-<td align="center">①容易造成梯度消失       <br>②存在幂运算，计算量大<br>③其输出不关于零点对称</td>
-<td align="center">①容易造成梯度消失  <br>②同样存在计算量大的问题</td>
-<td align="center">容易造成神经元的“死亡”</td>
-</tr>
-<tr>
-<td align="center">图形</td>
-<td align="center"><img src="https://i.loli.net/2020/06/08/HIX7TKyU2MsqlbV.png" srcset="/img/loading.gif" lazyload></td>
-<td align="center"><img src="https://i.loli.net/2020/06/08/9DEFnfop1qmNM7T.png" srcset="/img/loading.gif" lazyload></td>
-<td align="center"><img src="https://i.loli.net/2020/06/08/Nc2aBh3O5pEdk4Y.png" srcset="/img/loading.gif" lazyload></td>
-</tr>
-</tbody></table>
-<h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><h3 id="相比于sigmoid函数，tanh激活函数输出关于“零点”对称的好处是什么？"><a href="#相比于sigmoid函数，tanh激活函数输出关于“零点”对称的好处是什么？" class="headerlink" title="相比于sigmoid函数，tanh激活函数输出关于“零点”对称的好处是什么？"></a>相比于sigmoid函数，tanh激活函数输出关于“零点”对称的好处是什么？</h3><p>对于sigmoid函数而言，其输出始终为正，这会<strong>导致在深度网络训练中模型的收敛速度变慢</strong>，因为在反向传播链式求导过程中，权重更新的效率会降低（具体推导可以参考<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/50396271?from=profile_question_card">这篇文章</a>）。</p>
-<p>此外，sigmoid函数的输出均大于0，作为下层神经元的输入会导致下层输入不是0均值的，随着网络的加深可能会使得原始数据的分布发生改变。而在深度学习的网络训练中，经常需要将数据处理成零均值分布的情况，以提高收敛效率，因此tanh函数更加符合这个要求。</p>
-<p>sigmoid函数的输出在[0,1]之间，比较适合用于二分类问题。</p>
-<h3 id="为什么RNN中常用tanh函数作为激活函数而不是ReLU？"><a href="#为什么RNN中常用tanh函数作为激活函数而不是ReLU？" class="headerlink" title="为什么RNN中常用tanh函数作为激活函数而不是ReLU？"></a>为什么RNN中常用tanh函数作为激活函数而不是ReLU？</h3><p>详细分析可以参考<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/61265076/answer/186347780">这篇文章</a>。下面简单用自己的话总结一下：</p>
-<p>RNN中将tanh函数作为激活函数本身就存在梯度消失的问题，而ReLU本就是为了克服梯度消失问题而生的，那为什么不能<strong>直接</strong>（注意：这里说的是直接替代，事实上通过<strong>截断优化</strong>ReLU仍可以在RNN中取得很好的表现）用ReLU来代替RNN中的tanh来作为激活函数呢？<strong>这是因为ReLU的导数只能为0或1，而导数为1的时候在RNN中很容易造成梯度爆炸问题</strong>。</p>
-<p><strong>为什么会出现梯度爆炸的问题呢？</strong>因为在RNN中，每个神经元在不同的时刻都共享一个参数W（这点与CNN不同，CNN中每一层都使用独立的参数$W_i$），因此在前向和反向传播中，每个神经元的输出都会作为下一个时刻本神经元的输入，从某种意义上来讲相当于对其参数矩阵W作了连乘，如果W中有其中一个特征值大于1，则多次累乘之后的结果将非常大，自然就产生了梯度爆炸的问题。</p>
-<p><strong>那为什么ReLU在CNN中不存在连乘的梯度爆炸问题呢？</strong>因为在CNN中，每一层都有不同的参数$W_i$，有的特征值大于1，有的小于1，在某种意义上可以理解为抵消了梯度爆炸的可能。</p>
-<h3 id="如何解决ReLU神经元“死亡”的问题？"><a href="#如何解决ReLU神经元“死亡”的问题？" class="headerlink" title="如何解决ReLU神经元“死亡”的问题？"></a>如何解决ReLU神经元“死亡”的问题？</h3><p>①采用Leaky ReLU等激活函数    ②设置较小的学习率进行训练    ③使用momentum优化算法动态调整学习率</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/neo_lcx/article/details/100122938">最全最详细的常见激活函数总结（sigmoid、Tanh、ReLU等）及激活函数面试常见问题总结</a></p>
+                <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>今天小伙伴问会不会梯度求导，发现自己对离散变量求导并不熟悉，所以以somafmax为例子复习下，再进阶其实了解计算图了。</p>
+<h2 id="softmax函数"><a href="#softmax函数" class="headerlink" title="softmax函数"></a>softmax函数</h2><p><strong>softmax用于多分类过程中</strong>，它将多个神经元的输出，映射到（0,1）区间内，可以看成概率来理解，从而来进行多分类！</p>
+<p>假设我们有一个数组$Z$，$Z_i$表示$Z$中的第i个元素，那么这个元素的softmax值就是:</p>
+<p>​                                                                                           $$S_i = \frac {e^{z_i}}{\sum_{j}e^{z_j}}$$</p>
+<p>更形象的如下图表示：</p>
+<p><img src="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/v2-11758fbc2fc5bbbc60106926625b3a4f_r.jpg" srcset="/img/loading.gif" lazyload alt="preview"></p>
+<p>softmax直白来说就是将原来输出是3,1,-3 通过softmax函数一作用，就映射成为(0,1)的值，而这些值的累和为1（满足概率的性质），那么我们就可以将它理解成概率，在最后选取输出结点的时候，我们就可以选取概率最大（也就是值对应最大的）结点，作为我们的预测目标！</p>
+<h2 id="softmax求导"><a href="#softmax求导" class="headerlink" title="softmax求导"></a>softmax求导</h2><p>在神经网络中，我们经常可以看到以下公式，用于计算结点的激活值：</p>
+<p><img src="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/20210314234609710.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/20210314234624842.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>计算示意图如下：</p>
+<p><img src="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/202103142348336.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>从图中可以得到:</p>
+<p>$z4 = w41<em>o1+w42</em>o2+w43*o3 + b14$</p>
+<p>$z5 = w51<em>o1+w52</em>o2+w53*o3 + b25$</p>
+<p>$z6 = w61<em>o1+w62</em>o2+w63*o3 + b36$</p>
+<p>直接甩出<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=Softmax&spm=1001.2101.3001.7020">Softmax</a>的公式：</p>
+<p><img src="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/20210314234638888.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>表示类别数，z表示输出向量，zj表示向量z的第j个值。</p>
+<p>对Softmax<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%B1%82%E5%AF%BC&spm=1001.2101.3001.7020">求导</a><strong>：显然是目标是<img src="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/20210314234716409.png" srcset="/img/loading.gif" lazyload alt="img">和<img src="https://img-blog.csdnimg.cn/20210314234716410.png" srcset="/img/loading.gif" lazyload alt="img"></strong></p>
+<p>根据求导的链式法则：</p>
+<p><img src="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/image-20220904170229139.png" srcset="/img/loading.gif" lazyload alt="image-20220904170229139"></p>
+<p>所以核心问题就转换为求<img src="https://img-blog.csdnimg.cn/20210314234716414.png" srcset="/img/loading.gif" lazyload alt="img"> ，在接触到这个式子的时候，考虑到一个问题，为什么这里是对<img src="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/20210314234716422.png" srcset="/img/loading.gif" lazyload alt="img">求导而不是对<img src="https://img-blog.csdnimg.cn/20210314234821859.png" srcset="/img/loading.gif" lazyload alt="img">求导，因为要考虑</p>
+<p>$i = j 和 i != j$的情况。</p>
+<img src="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/2021031423530680.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom: 67%;" />
+
+<img src="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/20210314235316498.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:67%;" />
+
+<p><img src="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/image-20220904172123950.png" srcset="/img/loading.gif" lazyload alt="image-20220904172123950"></p>
+<p>到此我们就能求出w和b了的梯度用于参数更新了，注意输入x维度(3,1), w维度(3,3), b维度(3,1), </p>
+<p>$w_{41}$的梯度是怎么计算的了，根据上面的图路线是：$s_4-&gt;z_4-&gt;o_1$, 此时i=j, 由<img src="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/image-20220904174600623.png" srcset="/img/loading.gif" lazyload alt="image-20220904174600623" style="zoom:50%;" />，可得$s_4(1-s_4)*o1$, 其他以此内推。</p>
+<h2 id="torch实现"><a href="#torch实现" class="headerlink" title="torch实现"></a>torch实现</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-comment"># 设置随机值</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">seed_set</span>(<span class="hljs-params">seed</span>):<br>    np.random.seed(seed)<br>    torch.manual_seed(seed)<br>    torch.cuda.manual_seed(seed)<br>    <span class="hljs-comment">#torch.cuda.manual_seed_all(seed)  # if you are using multi-GPU.</span><br>    torch.backends.cudnn.deterministic = <span class="hljs-literal">True</span><br>    torch.backends.cudnn.benchmark = <span class="hljs-literal">False</span><br><br>seed_set(<span class="hljs-number">42</span>)<br><br>w = torch.rand((<span class="hljs-number">4</span>, <span class="hljs-number">10</span>))<br>a = torch.rand((<span class="hljs-number">10</span>, <span class="hljs-number">10</span>), requires_grad=<span class="hljs-literal">True</span>)<br><br><br>b = a.<span class="hljs-built_in">sum</span>(dim=<span class="hljs-number">0</span>, keepdim=<span class="hljs-literal">True</span>)<br>c = a/b<br>y = w@c<br><br>vals = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">globals</span>().values())<br><span class="hljs-keyword">for</span> xx <span class="hljs-keyword">in</span> vals:<br>  <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(xx, torch.Tensor):<br>    <span class="hljs-keyword">if</span> xx.requires_grad: xx.retain_grad()<br><br>torch.<span class="hljs-built_in">sum</span>(y).backward()<br><span class="hljs-built_in">print</span>(y.grad)<br><span class="hljs-built_in">print</span>(c.grad)<br><span class="hljs-built_in">print</span>(b.grad)<br><span class="hljs-built_in">print</span>(a.grad)<br><br>exit()<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/25723112">详解softmax函数以及相关求导过程</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/ytusdc/article/details/80597945">softmax 函数以及相关求导过程+交叉熵</a></p>
 
                 
               </div>
@@ -419,8 +397,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>01—三种常见激活函数</div>
-      <div>https://kongyan66.github.io/2022/12/06/三种常见的激活函数/</div>
+      <div>08-softmax函数求导过程</div>
+      <div>https://kongyan66.github.io/2022/11/14/深度学习基础/08_softmax函数及求导过程/</div>
     </div>
     <div class="license-meta">
       
@@ -432,7 +410,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年12月6日</div>
+          <div>2022年11月14日</div>
         </div>
       
       
@@ -464,12 +442,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2022/11/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/09_%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BE%93%E5%85%A5%E7%BD%91%E7%BB%9C%E5%89%8D%E8%A6%81%E5%AF%B9%E5%9B%BE%E5%83%8F%E5%81%9A%E5%BD%92%E4%B8%80%E5%8C%96/" title="09-为什么输入网络要对图像作做归一化？">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">09-为什么输入网络要对图像作做归一化？</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/12/05/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/" title="测试文章">
-                        <span class="hidden-mobile">测试文章</span>
+                      <a href="/2022/11/13/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/07_%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E5%92%8C%E7%88%86%E7%82%B8%E4%BB%A5%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" title="07-梯度消失和梯度爆炸的原因及解决方法">
+                        <span class="hidden-mobile">07-梯度消失和梯度爆炸的原因及解决方法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

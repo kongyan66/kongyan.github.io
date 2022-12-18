@@ -16,24 +16,27 @@
   <meta name="author" content="孔言">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这是一篇测试文章">
+    <meta name="description" content="问题梯度消失无论是笔试还是面试都是常客了，其实对应于梯度消失，还有一个梯度爆炸的概念，这又是什么导致的呢？下面我们将根据公式推导来解释何为梯度消失与梯度爆炸。 梯度消失和梯度爆炸的表现网络层数越多，模型训练的时候便越容易出现 梯度消失(gradient vanish) 和 梯度爆炸(gradient explod) 这种梯度不稳定的问题。假设现在有一个含有３层隐含层的神经网络：  梯度消失发生时的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="测试文章">
-<meta property="og:url" content="https://kongyan66.github.io/2022/12/05/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/index.html">
+<meta property="og:title" content="07-梯度消失和梯度爆炸的原因及解决方法">
+<meta property="og:url" content="https://kongyan66.github.io/2022/11/13/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/07_%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E5%92%8C%E7%88%86%E7%82%B8%E4%BB%A5%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="孔言的博客">
-<meta property="og:description" content="这是一篇测试文章">
+<meta property="og:description" content="问题梯度消失无论是笔试还是面试都是常客了，其实对应于梯度消失，还有一个梯度爆炸的概念，这又是什么导致的呢？下面我们将根据公式推导来解释何为梯度消失与梯度爆炸。 梯度消失和梯度爆炸的表现网络层数越多，模型训练的时候便越容易出现 梯度消失(gradient vanish) 和 梯度爆炸(gradient explod) 这种梯度不稳定的问题。假设现在有一个含有３层隐含层的神经网络：  梯度消失发生时的">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://kongyan66.github.io/2022/12/05/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png">
-<meta property="article:published_time" content="2022-12-05T13:24:17.000Z">
-<meta property="article:modified_time" content="2022-12-05T13:28:56.389Z">
+<meta property="og:image" content="https://i.loli.net/2020/05/21/SArqy1bp56euwIV.png">
+<meta property="og:image" content="https://i.loli.net/2020/05/21/aplXMCsvPw4rh2Q.jpg">
+<meta property="og:image" content="https://i.loli.net/2020/05/21/eca5HdVqL9EBmuU.png">
+<meta property="og:image" content="https://i.loli.net/2020/05/21/dIgKDuw976leTF4.png">
+<meta property="article:published_time" content="2022-11-13T12:24:17.000Z">
+<meta property="article:modified_time" content="2022-12-18T13:07:28.945Z">
 <meta property="article:author" content="孔言">
-<meta property="article:tag" content="原创">
+<meta property="article:tag" content="转载">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://kongyan66.github.io/2022/12/05/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/21/SArqy1bp56euwIV.png">
   
   
   
-  <title>测试文章 - 孔言的博客</title>
+  <title>07-梯度消失和梯度爆炸的原因及解决方法 - 孔言的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -216,7 +219,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="测试文章"></span>
+            <span id="subtitle" data-typed-text="07-梯度消失和梯度爆炸的原因及解决方法"></span>
           
         </div>
 
@@ -227,8 +230,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-12-05 21:24" pubdate>
-          2022年12月5日 晚上
+        <time datetime="2022-11-13 20:24" pubdate>
+          2022年11月13日 晚上
         </time>
       </span>
     
@@ -239,7 +242,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8 字
+          1.8k 字
         
       </span>
     
@@ -250,7 +253,7 @@
         
         
         
-          1 分钟
+          16 分钟
         
       </span>
     
@@ -296,13 +299,32 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">测试文章</h1>
+            <h1 style="display: none">07-梯度消失和梯度爆炸的原因及解决方法</h1>
             
             
               <div class="markdown-body">
                 
-                <p>这是一篇测试文章</p>
-<p><img src="%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png" srcset="/img/loading.gif" lazyload alt="图片引用方法二"></p>
+                <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>梯度消失无论是笔试还是面试都是常客了，其实对应于梯度消失，还有一个梯度爆炸的概念，这又是什么导致的呢？下面我们将根据公式推导来解释何为梯度消失与梯度爆炸。</p>
+<h2 id="梯度消失和梯度爆炸的表现"><a href="#梯度消失和梯度爆炸的表现" class="headerlink" title="梯度消失和梯度爆炸的表现"></a>梯度消失和梯度爆炸的表现</h2><p>网络层数越多，模型训练的时候便越容易出现 梯度消失(gradient vanish) 和 梯度爆炸(gradient explod) 这种梯度不稳定的问题。假设现在有一个含有３层隐含层的神经网络：</p>
+<p><img src="https://i.loli.net/2020/05/21/SArqy1bp56euwIV.png" srcset="/img/loading.gif" lazyload alt="这里写图片描述"></p>
+<p><strong>梯度消失发生时的表现是：</strong>靠近输出层的 hidden layer 3 的权值更新正常，但是靠近输入层的 hidden layer 1 的权值更新非常慢，导致其权值几乎不变，仍接近于初始化的权值。这就导致 hidden layer 1 相当于只是一个映射层，对所有的输入做了一个函数映射，这时的深度学习网络的学习等价于只有后几层的隐含层网络在学习。</p>
+<p><strong>梯度爆炸发生时的表现是：</strong>当初始的权值太大，靠近输入层的 hidden layer 1 的权值变化比靠近输出层的 hidden layer 3 的权值变化更快。</p>
+<p><strong>所以梯度消失和梯度爆炸都是出现在靠近输入层的参数中。</strong></p>
+<h2 id="产生梯度消失与梯度爆炸的根本原因"><a href="#产生梯度消失与梯度爆炸的根本原因" class="headerlink" title="产生梯度消失与梯度爆炸的根本原因"></a>产生梯度消失与梯度爆炸的根本原因</h2><h3 id="梯度消失分析"><a href="#梯度消失分析" class="headerlink" title="梯度消失分析"></a>梯度消失分析</h3><p>下图是我画的一个非常简单的神经网络，每层都只有一个神经元，且神经元所用的激活函数 $\sigma$ 为 sigmoid 函数，$Loss$ 表示损失函数，前一层的输出与后一层的输入关系如下：<br>$$<br>y_i = \sigma(z_i) = \sigma(w_i*x_i+b_i), \quad其中x_i = y_{i-1}<br>$$<br><img src="https://i.loli.net/2020/05/21/aplXMCsvPw4rh2Q.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>因此，根据反向传播的链式法则，损失函数相对于参数 $b_1$ 的梯度计算公式如下：<br>$$<br>\frac{\partial Loss}{\partial b_1} = \frac{\partial Loss}{\partial y_4}*\frac{\partial y_4}{\partial z_4}*\frac{\partial z_4}{\partial x_4}*\frac{\partial x_4}{\partial z_3}*\frac{\partial z_3}{\partial x_3}*\frac{\partial x_3}{\partial z_2}*\frac{\partial z_2}{\partial x_2}*\frac{\partial x_2}{\partial z_1}*\frac{\partial z_1}{\partial b_1} \<br>= \frac{\partial Loss}{\partial y_4}*\partial{‘}(z_4)<em>w_4</em>\partial{‘}(z_3)<em>w_3</em>\partial{‘}(z_2)<em>w_2</em>\partial{‘}(z_1)<br>$$<br>而 sigmoid 函数的导数 $\sigma{‘}(x)$ 如下图所示：</p>
+<p><img src="https://i.loli.net/2020/05/21/eca5HdVqL9EBmuU.png" srcset="/img/loading.gif" lazyload alt="这里写图片描述"></p>
+<p>即 $\sigma{‘}(x)\le \frac{1}{4}$ ，而我们一般会使用标准方法来初始化网络权重，即使用一个均值为 0 标准差为 1 的高斯分布，因此初始化的网络参数 $w_i$ 通常都小于 1 ，从而有 $|\sigma{‘}(z_i)<em>w_i|\le \frac{1}{4}$ 。*<em>根据公式(2)的计算规律，层数越多，越是前面的层的参数的求导结果越小，于是便导致了梯度消失情况的出现。</em></em></p>
+<h3 id="梯度爆炸分析"><a href="#梯度爆炸分析" class="headerlink" title="梯度爆炸分析"></a><strong>梯度爆炸分析</strong></h3><p>在分析梯度消失时，我们明白了导致其发生的主要原因是　$|\sigma{‘}(z_i)*w_i|\le \frac{1}{4}$ ，经链式法则反向传播后，越靠近输入层的参数的梯度越小。而导致梯度爆炸的原因是：$|\sigma{‘}(z_i)*w_i|&gt;1$，当该表达式大于 1 时，经链式法则的指数倍传播后，前面层的参数的梯度会非常大，从而出现梯度爆炸。</p>
+<p>但是要使得$|\sigma{‘}(z_i)<em>w_i|&gt;1$，就得 $|w_i| &gt; 4$才行，按照 $|\sigma{‘}(w_i</em>x_i+b_i)<em>w_i|&gt;1$，可以计算出 $x_i$ 的数值变化范围很窄，仅在公式(3)的范围内，才会出现梯度爆炸，*<em>因此梯度爆炸问题在使用 sigmoid 激活函数时出现的情况较少，不容易发生。</em></em></p>
+<p><img src="https://i.loli.net/2020/05/21/dIgKDuw976leTF4.png" srcset="/img/loading.gif" lazyload alt="这里写图片描述"></p>
+<h2 id="怎么解决"><a href="#怎么解决" class="headerlink" title="怎么解决"></a>怎么解决</h2><p>如上分析，<strong>造成梯度消失和梯度爆炸问题是网络太深，网络权值更新不稳定造成的，本质上是因为梯度反向传播中的连乘效应</strong>。另外一个原因是当激活函数使用 sigmoid 时，梯度消失问题更容易发生，因此可以考虑的解决方法如下：</p>
+<ol>
+<li>压缩模型层数</li>
+<li>改用其他的激活函数如 ReLU</li>
+<li>使用 BN 层</li>
+<li>使用 ResNet 的短路连接结构(没有解决爆炸问题)</li>
+</ol>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_17130909/article/details/80582226">激活函数及其作用以及梯度消失、爆炸、神经元节点死亡的解释</a></p>
 
                 
               </div>
@@ -321,7 +343,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/python/" class="category-chain-item">python</a>
+  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" class="category-chain-item">深度学习基础</a>
   
   
 
@@ -336,7 +358,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%8E%9F%E5%88%9B/">#原创</a>
+        <a href="/tags/%E8%BD%AC%E8%BD%BD/">#转载</a>
       
     </div>
   
@@ -348,8 +370,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>测试文章</div>
-      <div>https://kongyan66.github.io/2022/12/05/测试文章/</div>
+      <div>07-梯度消失和梯度爆炸的原因及解决方法</div>
+      <div>https://kongyan66.github.io/2022/11/13/深度学习基础/07_梯度消失和爆炸以及解决方法/</div>
     </div>
     <div class="license-meta">
       
@@ -361,7 +383,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年12月5日</div>
+          <div>2022年11月13日</div>
         </div>
       
       
@@ -393,21 +415,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/12/06/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/01_%E4%B8%89%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/" title="01—三种常见激活函数">
+                      <a href="/2022/11/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/08_softmax%E5%87%BD%E6%95%B0%E5%8F%8A%E6%B1%82%E5%AF%BC%E8%BF%87%E7%A8%8B/" title="08-softmax函数求导过程">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">01—三种常见激活函数</span>
+                        <span class="hidden-mobile">08-softmax函数求导过程</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
-                    
-                      <a href="/2022/12/05/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/hello-world/" title="Hello World">
-                        <span class="hidden-mobile">Hello World</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
                     
                   </article>
                 </div>

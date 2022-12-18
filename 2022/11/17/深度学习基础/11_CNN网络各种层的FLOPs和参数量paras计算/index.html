@@ -16,24 +16,24 @@
   <meta name="author" content="孔言">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这是一篇测试文章">
+    <meta name="description" content="FLOPs 这里先注意一下FLOPs的写法，不要弄混了：**FLOPS(全大写)**：是floating point operations per second的缩写，意指每秒浮点运算次数，理解为计算速度，是一个衡量硬件性能的指标。**FLOPs(s小写)**：，是floating point operations的缩写（s表复数），意指浮点运算数，理解为计算量，可以用来衡量算法&#x2F;模型的复杂度，也">
 <meta property="og:type" content="article">
-<meta property="og:title" content="测试文章">
-<meta property="og:url" content="https://kongyan66.github.io/2022/12/05/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/index.html">
+<meta property="og:title" content="11-FLops及Parameters计算">
+<meta property="og:url" content="https://kongyan66.github.io/2022/11/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/11_CNN%E7%BD%91%E7%BB%9C%E5%90%84%E7%A7%8D%E5%B1%82%E7%9A%84FLOPs%E5%92%8C%E5%8F%82%E6%95%B0%E9%87%8Fparas%E8%AE%A1%E7%AE%97/index.html">
 <meta property="og:site_name" content="孔言的博客">
-<meta property="og:description" content="这是一篇测试文章">
+<meta property="og:description" content="FLOPs 这里先注意一下FLOPs的写法，不要弄混了：**FLOPS(全大写)**：是floating point operations per second的缩写，意指每秒浮点运算次数，理解为计算速度，是一个衡量硬件性能的指标。**FLOPs(s小写)**：，是floating point operations的缩写（s表复数），意指浮点运算数，理解为计算量，可以用来衡量算法&#x2F;模型的复杂度，也">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://kongyan66.github.io/2022/12/05/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png">
-<meta property="article:published_time" content="2022-12-05T13:24:17.000Z">
-<meta property="article:modified_time" content="2022-12-05T13:28:56.389Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/%25E5%25BE%25AE%25E4%25BF%25A1%25E6%2588%25AA%25E5%259B%25BE_20220707161709.png">
+<meta property="article:published_time" content="2022-11-17T12:24:17.000Z">
+<meta property="article:modified_time" content="2022-12-18T13:11:58.994Z">
 <meta property="article:author" content="孔言">
-<meta property="article:tag" content="原创">
+<meta property="article:tag" content="转载">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://kongyan66.github.io/2022/12/05/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/%25E5%25BE%25AE%25E4%25BF%25A1%25E6%2588%25AA%25E5%259B%25BE_20220707161709.png">
   
   
   
-  <title>测试文章 - 孔言的博客</title>
+  <title>11-FLops及Parameters计算 - 孔言的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -216,7 +216,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="测试文章"></span>
+            <span id="subtitle" data-typed-text="11-FLops及Parameters计算"></span>
           
         </div>
 
@@ -227,8 +227,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-12-05 21:24" pubdate>
-          2022年12月5日 晚上
+        <time datetime="2022-11-17 20:24" pubdate>
+          2022年11月17日 晚上
         </time>
       </span>
     
@@ -239,7 +239,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8 字
+          1.8k 字
         
       </span>
     
@@ -250,7 +250,7 @@
         
         
         
-          1 分钟
+          15 分钟
         
       </span>
     
@@ -296,13 +296,43 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">测试文章</h1>
+            <h1 style="display: none">11-FLops及Parameters计算</h1>
             
             
               <div class="markdown-body">
                 
-                <p>这是一篇测试文章</p>
-<p><img src="%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png" srcset="/img/loading.gif" lazyload alt="图片引用方法二"></p>
+                <h2 id="FLOPs"><a href="#FLOPs" class="headerlink" title="FLOPs"></a>FLOPs</h2><blockquote>
+<p><strong>这里先注意一下FLOPs的写法，不要弄混了：</strong><br>**FLOPS(全大写)**：是floating point operations per second的缩写，意指每秒浮点运算次数，理解为计算速度，是一个衡量硬件性能的指标。<br>**FLOPs(s小写)**：，是floating point operations的缩写（s表复数），意指浮点运算数，理解为计算量，可以用来衡量算法/模型的复杂度，也就是我们这里要讨论的。</p>
+</blockquote>
+<h3 id="标准卷积层的FLOPs"><a href="#标准卷积层的FLOPs" class="headerlink" title="标准卷积层的FLOPs"></a>标准卷积层的FLOPs</h3><p>卷积层 wx + b 需要计算两部分，首先考虑前半部分 wx 的计算量(+b为偏置计算量），可得通式</p>
+<p><strong>通式：</strong>Flops =  计算每个输出特征值的 乘法次数 + 加法次数 + 通道合并次数(忽略) + 偏置(输出通道数)</p>
+<p>对于一个输出为WxHxC的Featture map，我们可以先计算得到一个通道上一个点(pixel)所用的计算量,再计算特征图所有点的<br>$$<br>乘法运算数M=k_{w}<em>k_h</em>C_{in} \<br>加法运算数A=（k_{w}<em>k_h-1）</em>C_{in} \<br>通道运算数C=C_{in} - 1 \<br>则 Flops= (M+A+C+1(bisa))<em>W_{out}<em>H_{out}<em>C_{out}\<br>化简得到：Flops = (2</em>k_w</em>k_h</em>C_{in})*W_{out}*H_{out}*C_{out}<br>$$</p>
+<p>考虑bias：$(2*C_{int}*k^2)<em>C_{out}<em>H</em>W$<br>不考虑bias：$(2</em>C_{int}*k^2-1)*C_{out}<em>H</em>W$</p>
+<p>参数定义（下同）：$C_{int}$为输入通道数，k为卷积核边长， $C_{out}$为输出通道数，H*W为输出特征图的长宽。</p>
+<p>其实卷积层在实现的时候可以选择加bias或者不加，在很多的框架当中是一个可以选择的参数，为了严谨，这里特地提一下。</p>
+<p>怎么理解上面的公式呢？以不考虑bias为例。我们先计算输出的feature map中的一个pixel的计算量，然后再乘以feature map的规模大小即可，所以我们主要分析下上面公式中的括号部分：<br>$$<br>(2*C_{int}*k^2-1) = C_{int}*k^2 + C_{int}*k^2-1<br>$$</p>
+<p>可以看到我们把它分成了两部分，<strong>第一项是乘法运算数，第二项是加法运算数，因为n个数相加，要加n-1次，所以不考虑bias，会有一个-1，如果考虑bias，刚好中和掉。</strong></p>
+<h3 id="深度可分离卷积的FLOPs"><a href="#深度可分离卷积的FLOPs" class="headerlink" title="深度可分离卷积的FLOPs"></a>深度可分离卷积的FLOPs</h3><p>深度可分离卷积分成两部分，一部分是分通道卷积，另一部分是1*1卷积。（如果不知道深度可分离卷积的朋友可以先看下<a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1634399239921135758&wfr=spider&for=pc">这个博客</a>，这是一种可大大减少计算量的卷积方法）</p>
+<p><img src="https://raw.githubusercontent.com/kongyan66/Img-for-md/master/img/%25E5%25BE%25AE%25E4%25BF%25A1%25E6%2588%25AA%25E5%259B%25BE_20220707161709.png" srcset="/img/loading.gif" lazyload alt="微信截图_20220707161709"></p>
+<p>这里的讨论以考虑bias为准：<br>第一部分：$(2<em>k^2 )<em>H</em>W</em>C_{int}$<br>第二部分：$2<em>C_{int}<em>H</em>W</em>C_{out}$</p>
+<p>最终的结果就是两部分相加。</p>
+<h3 id="池化层的FLOPS"><a href="#池化层的FLOPS" class="headerlink" title="池化层的FLOPS"></a>池化层的FLOPS</h3><p>这里又分为全局池化和一般池化两种情况：</p>
+<h4 id="全局池化"><a href="#全局池化" class="headerlink" title="全局池化"></a>全局池化</h4><p>针对输入所有值进行一次池化操作，不论是max、sum还是avg，都可以简单地看做是只需要对每个值算一次。</p>
+<p>所以结果为：$H_{int}*W_{int}*C_{int}$</p>
+<h4 id="一般池化"><a href="#一般池化" class="headerlink" title="一般池化"></a>一般池化</h4><p>答案是：$k^2*H_{out}*W_{out}*C_{out}$</p>
+<p>注意池化层的：$C_{out} = C_{int}$</p>
+<h3 id="全连接层的FLOPs"><a href="#全连接层的FLOPs" class="headerlink" title="全连接层的FLOPs"></a>全连接层的FLOPs</h3><p>考虑bias：$(2*I)<em>O$<br>不考虑bias：$(2</em>I-1)*O$</p>
+<p>分析同理，括号内是一个输出神经元的计算量，拓展到O个输出神经元。（如果该全连接层的输入是卷积层的输出，需要先将输出展开成一列向量）</p>
+<h3 id="激活层的FLOPs"><a href="#激活层的FLOPs" class="headerlink" title="激活层的FLOPs"></a>激活层的FLOPs</h3><h4 id="ReLU"><a href="#ReLU" class="headerlink" title="ReLU"></a>ReLU</h4><p>ReLU一般都是跟在卷积层的后面，这里假设卷积层的输出为$H<em>W</em>C$，因为ReLU函数的计算只涉及到一个判断，因此计算量就是$H<em>W</em>C$</p>
+<h4 id="sigmoid"><a href="#sigmoid" class="headerlink" title="sigmoid"></a>sigmoid</h4><p>根据sigmoid的公式可以知道，每个输入都需要经历4次运算，因此计算量是$H<em>W</em>C*4$（参数含义同ReLU）</p>
+<hr>
+<h2 id="参数量"><a href="#参数量" class="headerlink" title="参数量"></a>参数量</h2><h3 id="卷积层的参数量"><a href="#卷积层的参数量" class="headerlink" title="卷积层的参数量"></a>卷积层的参数量</h3><p>卷积层的参数量与输入特征图大小无关</p>
+<p>考虑bias：$(k^2*C_{int}+1)<em>C_{out}$<br>不考虑bias：$(k^2</em>C_{int})*C_{out}$</p>
+<h3 id="深度可分离卷积的参数量"><a href="#深度可分离卷积的参数量" class="headerlink" title="深度可分离卷积的参数量"></a>深度可分离卷积的参数量</h3><p>不考虑bias：<br>第一部分：$k^2<em>C_{int}$<br>第二部分：$(1</em>1*C_{int})*C_{out}$<br>最终结果为两者相加。</p>
+<h3 id="池化层的参数量"><a href="#池化层的参数量" class="headerlink" title="池化层的参数量"></a>池化层的参数量</h3><p>池化层没有需要学习的参数，所以参数量为0。</p>
+<h3 id="全连接层的参数量"><a href="#全连接层的参数量" class="headerlink" title="全连接层的参数量"></a>全连接层的参数量</h3><p>考虑bias：$I*O+1$</p>
+<hr>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/65305385/answer/451060549">CNN 模型所需的计算力（flops）和参数（parameters）数量是怎么计算的？</a></p>
 
                 
               </div>
@@ -321,7 +351,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/python/" class="category-chain-item">python</a>
+  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" class="category-chain-item">深度学习基础</a>
   
   
 
@@ -336,7 +366,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%8E%9F%E5%88%9B/">#原创</a>
+        <a href="/tags/%E8%BD%AC%E8%BD%BD/">#转载</a>
       
     </div>
   
@@ -348,8 +378,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>测试文章</div>
-      <div>https://kongyan66.github.io/2022/12/05/测试文章/</div>
+      <div>11-FLops及Parameters计算</div>
+      <div>https://kongyan66.github.io/2022/11/17/深度学习基础/11_CNN网络各种层的FLOPs和参数量paras计算/</div>
     </div>
     <div class="license-meta">
       
@@ -361,7 +391,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年12月5日</div>
+          <div>2022年11月17日</div>
         </div>
       
       
@@ -393,9 +423,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/12/06/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/01_%E4%B8%89%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/" title="01—三种常见激活函数">
+                      <a href="/2022/11/18/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/12_CNN%E5%9C%A8%E5%9B%BE%E5%83%8F%E4%B8%8A%E8%A1%A8%E7%8E%B0%E5%A5%BD%E7%9A%84%E5%8E%9F%E5%9B%A0/" title="12-为什么CNN在CV领域表现优秀？">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">01—三种常见激活函数</span>
+                        <span class="hidden-mobile">12-为什么CNN在CV领域表现优秀？</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -403,8 +433,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/12/05/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/hello-world/" title="Hello World">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2022/11/16/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/10_%E4%BC%98%E5%8C%96%E5%99%A8%E5%8E%9F%E7%90%86%E5%8F%8A%E5%8F%91%E5%B1%95%E8%B7%AF%E7%BA%BF/" title="10-优化器原理及其发展">
+                        <span class="hidden-mobile">10-优化器原理及其发展</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -1,0 +1,865 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="孔言">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="问题简述CNN分类网络的演变脉络及各自的贡献与特点 综述深度学习的浪潮就是从CNN开始的，它结构形态的变化也见证着这门技术的发展。现在涌进来学习深度学习的大部分人都是做计算机视觉的，因为这个门槛相对较低，业界数据集开源了很多，也比较直观，而且对硬件设备的要求也没以前那么大，导致现在就业竞争非常大。CV各种任务的网络结构变形更是日新月异，让人眼花缭乱，但是不管怎么变，基本都是基于卷积、池化和全连接这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="15-CNN分类网络发展历程">
+<meta property="og:url" content="https://kongyan66.github.io/2022/11/22/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/15_%E7%AE%80%E8%BF%B0CNN%E5%88%86%E7%B1%BB%E7%BD%91%E7%BB%9C%E7%9A%84%E6%BC%94%E5%8F%98%E8%84%89%E7%BB%9C%E5%8F%8A%E5%90%84%E8%87%AA%E7%9A%84%E8%B4%A1%E7%8C%AE%E4%B8%8E%E7%89%B9%E7%82%B9/index.html">
+<meta property="og:site_name" content="孔言的博客">
+<meta property="og:description" content="问题简述CNN分类网络的演变脉络及各自的贡献与特点 综述深度学习的浪潮就是从CNN开始的，它结构形态的变化也见证着这门技术的发展。现在涌进来学习深度学习的大部分人都是做计算机视觉的，因为这个门槛相对较低，业界数据集开源了很多，也比较直观，而且对硬件设备的要求也没以前那么大，导致现在就业竞争非常大。CV各种任务的网络结构变形更是日新月异，让人眼花缭乱，但是不管怎么变，基本都是基于卷积、池化和全连接这">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-ee8b9b069a5e4e0d906ea955e9ae4e40_720w.jpg">
+<meta property="og:image" content="https://i.loli.net/2020/06/26/9VbjCshgR1Ypxk2.png">
+<meta property="og:image" content="https://i.loli.net/2020/06/26/BIaJfzVQTbdguXh.jpg">
+<meta property="og:image" content="https://i.loli.net/2020/06/26/Xe5pz8TAjJdVW9k.jpg">
+<meta property="og:image" content="c:/Users/10428/AppData/Roaming/Typora/typora-user-images/image-20221102111753223.png">
+<meta property="og:image" content="https://i.loli.net/2020/06/26/IRrt4mA1uUHpb7E.jpg">
+<meta property="og:image" content="https://i.loli.net/2020/06/26/MtHLK2zl41Co63O.png">
+<meta property="og:image" content="https://i.loli.net/2020/06/26/7D6JqyXYgoHQ2TA.png">
+<meta property="og:image" content="https://i.loli.net/2020/06/26/IzyaK6h785upLfs.jpg">
+<meta property="og:image" content="https://i.loli.net/2020/06/26/pSbxWTAD9dhG28R.jpg">
+<meta property="og:image" content="https://i.loli.net/2020/06/26/MoIS3rdkn7mc2JV.jpg">
+<meta property="og:image" content="https://i.loli.net/2020/06/26/CBwYdqiphJEKubj.jpg">
+<meta property="og:image" content="https://i.loli.net/2020/06/26/yVIHSDuQmas8YcJ.png">
+<meta property="og:image" content="https://i.loli.net/2020/06/26/dYhxHE47w8VvDcz.png">
+<meta property="og:image" content="https://i.loli.net/2020/06/26/iAmkJhR1H3PBfEu.png">
+<meta property="og:image" content="https://i.loli.net/2020/06/26/rWiAq9ojelUF1fT.png">
+<meta property="article:published_time" content="2022-11-22T12:24:17.000Z">
+<meta property="article:modified_time" content="2022-12-18T13:16:07.378Z">
+<meta property="article:author" content="孔言">
+<meta property="article:tag" content="转载">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pic1.zhimg.com/80/v2-ee8b9b069a5e4e0d906ea955e9ae4e40_720w.jpg">
+  
+  
+  
+  <title>15-CNN分类网络发展历程 - 孔言的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"kongyan66.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"GOdvbImXlJ7bpHHpLhyOM384-MdYXbMMI","app_key":"KEbCsxSrJqlUDF2ZksEZc9tY","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>孔言的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="15-CNN分类网络发展历程"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-11-22 20:24" pubdate>
+          2022年11月22日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          41 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">15-CNN分类网络发展历程</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>简述CNN分类网络的演变脉络及各自的贡献与特点</p>
+<h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p>深度学习的浪潮就是从CNN开始的，它结构形态的变化也见证着这门技术的发展。现在涌进来学习深度学习的大部分人都是做计算机视觉的，因为这个门槛相对较低，业界数据集开源了很多，也比较直观，而且对硬件设备的要求也没以前那么大，导致现在就业竞争非常大。CV各种任务的网络结构变形更是日新月异，让人眼花缭乱，但是不管怎么变，基本都是基于卷积、池化和全连接这三件套。所以这篇文章主要是想回归一下最初CNN网络是怎么发展变化的。</p>
+<h2 id="LeNet-5"><a href="#LeNet-5" class="headerlink" title="LeNet-5"></a>LeNet-5</h2><p>LeNet 被视为CNN的开山之作，是LeCun大神在1998年提出的，<strong>定义了基本组件：卷积、池化、全连接，俗称CPF三件套</strong>。主要用于手写数字识别10分类问题，被广泛应用在金融领域。LeNet的结构非常简单，如名字所示的那样，主要有5层（这里没有统计紧跟每个卷积层后的 2x2 池化层，如果加上池化层，应该是7层），包括：<strong>两层 5x5 卷积层和三层全连接层</strong>。下面便是LeNet-5架构示意图。</p>
+<p><img src="https://pic1.zhimg.com/80/v2-ee8b9b069a5e4e0d906ea955e9ae4e40_720w.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h3 id="LeNet-的关键点与贡献："><a href="#LeNet-的关键点与贡献：" class="headerlink" title="LeNet 的关键点与贡献："></a>LeNet 的关键点与贡献：</h3><ol>
+<li>LeNet 是第一个将反向传播应用于实际应用的CNN架构，突然之间，深度学习不再只是一种理论。</li>
+<li>定义了基本组件：卷积、池化、全连接。</li>
+</ol>
+<h2 id="AlexNet"><a href="#AlexNet" class="headerlink" title="AlexNet"></a>AlexNet</h2><p>可以说深度学习浪潮是从这个网络开始的，它是 ImageNet 图片分类竞赛 2012 年的冠军。AlexNet 有着和 LeNet-5 相似网络结构，但更深、有更多参数。<strong>AlexNet包含5层卷积和3层全连接，实现1000分类</strong>。（注意：AlexNet 采用的 是11x11，7x7与5x5大小的卷积核）</p>
+<p>有意思的是，在当时由于算力不足，作者将网络分上下两部分分别卷积，放在两块GPU上进行训练。这一操作倒是给了后来人的诸多启发，典型的如 shuffle-net，借用该想法进行轻量级改进。</p>
+<img src="https://i.loli.net/2020/06/26/9VbjCshgR1Ypxk2.png" srcset="/img/loading.gif" lazyload alt="https://upload-images.jianshu.io/upload_images/7229096-47de76410f44a0af.png" style="zoom:80%;" />
+
+<h3 id="AlexNet-关键点与贡献："><a href="#AlexNet-关键点与贡献：" class="headerlink" title="AlexNet 关键点与贡献："></a>AlexNet 关键点与贡献：</h3><ol>
+<li>如上所述的<strong>多 GPU 训练技术</strong>，不同的通道放在不同GPU上运算，最后再cat起来，是一种工程技术实现。</li>
+<li>使用了 <strong>ReLU</strong> 激活函数，使之有更好的梯度特性、训练更快，后来发现和其他激活函数也差不多，只是因为比较简单。</li>
+<li>使用了**随机失活(dropout)**。对于全连接层以及后来RNN，Atttention 挺有用的，但对于全卷积来说没啥大用。</li>
+<li>使用<strong>数据扩充</strong>技术。1.随机裁切 2.改变颜色通道</li>
+</ol>
+<h2 id="VGG"><a href="#VGG" class="headerlink" title="VGG"></a>VGG</h2><p>这是 ImageNet 2014年的亚军网络。当然 ImageNet 2013也举办了竞赛，但是其中的 ZF-Net 也就只是调整AlexNet的参数，包括卷积核大小、卷积步长、通道数，没啥亮点可言。</p>
+<p>VGG 主要在网络深度上进行探索，提出了两个深度的网络 <strong>VGG16（13 层卷积 + 3 层全连接）</strong>和 VGG19（16 层卷积 + 3 层全连接），由于VGG-16网络结构十分简单，并且很适合迁移学习，因此至今VGG-16仍在广泛使用。</p>
+<p><img src="https://i.loli.net/2020/06/26/BIaJfzVQTbdguXh.jpg" srcset="/img/loading.gif" lazyload alt="preview"></p>
+<h3 id="VGG-关键点与贡献："><a href="#VGG-关键点与贡献：" class="headerlink" title="VGG 关键点与贡献："></a>VGG 关键点与贡献：</h3><ol>
+<li><p><strong>结构简单</strong>，只有 3×3 卷积和2×2 汇合两种配置，并且<strong>重复堆叠</strong>相同的模块组合。卷积层不改变空间大小，每经过一次汇合层，空间大小减半。</p>
+<p>VGG提出了将所有这些卷积核分解为 3x3 卷积核的想法，按照感受野的概念去理解的话，两层 3x3 的卷积层的感受野与一层 5x5 的卷积层感受野一样，三层 3x3 的卷积层的感受野与一层 7x7 的卷积层感受野一样。但是 <strong>3x3 卷积层的堆叠可以在获得相同感受野的前提下使用更少的参数，多层的卷积也能增加模型的非线性效果。</strong></p>
+</li>
+<li><p><strong>初始化方法：先训练浅层网络，并使用浅层网络对深层网络进行初始化。</strong>（这是在 BN 层没提出来之前的很好的一种模型训练方法）。</p>
+</li>
+</ol>
+<h2 id="GoogLeNet"><a href="#GoogLeNet" class="headerlink" title="GoogLeNet"></a>GoogLeNet</h2><p>GoogLeNet 是 ImageNet 2014的冠军网络。GoogLeNet 不仅在深度上进行探索，还增加了网络的宽度，试图回答在设计网络时究竟应该选多大尺寸的卷积、或者应该选汇合层。其提出了Inception模块，同时用1×1、3×3、5×5卷积和3×3汇合相同尺寸不同深度的feature map，并concat所有结果。详情点这：<a target="_blank" rel="noopener" href="https://blog.csdn.net/csdn_xmj/article/details/116604126">inception v1网络</a>   <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30756181">inception v1-v4</a></p>
+<p><img src="https://i.loli.net/2020/06/26/Xe5pz8TAjJdVW9k.jpg" srcset="/img/loading.gif" lazyload alt="preview"></p>
+<h3 id="GoogLeNet-关键点与贡献："><a href="#GoogLeNet-关键点与贡献：" class="headerlink" title="GoogLeNet 关键点与贡献："></a>GoogLeNet 关键点与贡献：</h3><ol>
+<li> <strong>多分支</strong>分别处理，并级联结果。</li>
+<li>为了降低计算量，用了<strong>1×1卷积</strong>降维(先降后升)。</li>
+<li>使用了<strong>全局平均池化（Global average pooling）替代全连接层</strong>，使网络参数大幅减少，但目标检测小目标还是全连接好些。</li>
+</ol>
+<p>inception结构在之后的几年中从v1到v4不断改进。</p>
+<blockquote>
+<p><strong>Inception v2</strong>  在 v1 的基础上加入 batch normalization 技术，在tensorflow中，使用 BN 在激活函数之前效果更好；将 5x5 卷积替换成两个连续的 3x3 卷积，使网络更深，参数更少。使用$1<em>n$和  $n</em>1$这种非对称的卷积来代替n*n的对称卷积，既降低网络的参数，又增加了网络的深度</p>
+<p><strong>Inception v3</strong> 核心思想是将卷积核分解成更小的卷积，如将 7x7 分解成 1x7 和 7x1 两个卷积核。</p>
+<p><strong>inception V4</strong> 将原来卷积、池化的顺次连接（网络的前几层）替换为stem模块，来获得更深的网络结，又设计了三种inception模块。</p>
+<p><strong>Inception-ResNet  v2</strong> 在Inception模块基础上结合了 residual 模块。</p>
+</blockquote>
+<h2 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h2><p>ResNet 是 ImageNet 2015年的冠军网络，是一个里程碑的事件。ResNet旨在解决网络加深后训练难度增大的现象。其提出了residual模块，包含两个3×3卷积和一个短路连接(左图)。短路连接可以有效缓解反向传播时由于深度过深导致的<strong>梯度消失</strong>现象，这使得网络加深之后性能不会变差。因此 ResNet 网络的层数有 152 之多。</p>
+<h3 id="ResNet核心思想"><a href="#ResNet核心思想" class="headerlink" title="ResNet核心思想"></a>ResNet核心思想</h3><p>引入残差连接，求梯度时加上了浅层网络的梯度，避免了梯度消失，所以能训练更深的网络。</p>
+<img src="C:\Users\10428\AppData\Roaming\Typora\typora-user-images\image-20221102111753223.png" srcset="/img/loading.gif" lazyload alt="image-20221102111753223" style="zoom:50%;" />
+
+<h3 id="ResNet-关键点与贡献："><a href="#ResNet-关键点与贡献：" class="headerlink" title="ResNet 关键点与贡献："></a>ResNet 关键点与贡献：</h3><ol>
+<li><p>使用<strong>短路连接</strong>，使训练深层网络更容易，并且<strong>重复堆叠</strong>相同的模块组合。</p>
+</li>
+<li><p>ResNet大量使用了<strong>批量归一层</strong>。</p>
+</li>
+<li><p>对于很深的网络(超过50层)，ResNet使用了更高效的**<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/98692254">瓶颈(bottleneck)</a>**结构(右图)。</p>
+<p><img src="https://i.loli.net/2020/06/26/IRrt4mA1uUHpb7E.jpg" srcset="/img/loading.gif" lazyload alt="preview"></p>
+</li>
+</ol>
+<h2 id="ResNeXt"><a href="#ResNeXt" class="headerlink" title="ResNeXt"></a>ResNeXt</h2><p>ResNeXt 是 ImageNet 2016年的亚军网络，是 ResNet 的一个改进。传统的方法通常是靠加深或加宽网络来提升性能，但计算开销也会随之增加。ResNeXt旨在不改变模型复杂度的情况下提升性能。受精简而高效的Inception模块启发，ResNeXt将ResNet中非短路那一分支变为多个分支。</p>
+<img src="https://i.loli.net/2020/06/26/MtHLK2zl41Co63O.png" srcset="/img/loading.gif" lazyload alt="preview" style="zoom:80%;" />
+
+<h3 id="ResNeXt-关键点与贡献："><a href="#ResNeXt-关键点与贡献：" class="headerlink" title="ResNeXt 关键点与贡献："></a>ResNeXt 关键点与贡献：</h3><ol>
+<li>在 ResNet 的短路连接基础上，综合了 Inception 的优点，使用多分支进行处理，但是与 Inception不同的是，其<strong>每个分支的结构都相同</strong>。</li>
+<li>ResNeXt巧妙地利用<strong>分组卷积</strong>进行实现。</li>
+</ol>
+<h2 id="DenseNet"><a href="#DenseNet" class="headerlink" title="DenseNet"></a>DenseNet</h2><p><strong>DenseNet</strong>  其目的也是<u>避免梯度消失。</u>和residual模块不同，dense模块中任意两层之间均有短路连接。也就是说，每一层的输入通过级联(concatenation)包含了之前所有层的结果，即包含由低到高所有层次的特征。和之前方法不同的是，DenseNet中卷积层的滤波器数很少。DenseNet只用ResNet一半的参数即可达到ResNet的性能。</p>
+<p>实现方面，作者在大会报告指出，直接将输出级联会占用很大GPU存储。后来，通过共享存储，可以在相同的GPU存储资源下训练更深的DenseNet。但由于有些中间结果需要重复计算，该实现会增加训练时间。 </p>
+<p><img src="https://i.loli.net/2020/06/26/7D6JqyXYgoHQ2TA.png" srcset="/img/loading.gif" lazyload alt="preview"></p>
+<h2 id="SENet"><a href="#SENet" class="headerlink" title="SENet"></a>SENet</h2><p>SENet 是 ImageNet 2017年的冠军网络，也是 ImageNet 竞赛的收官之作。SENet 通过额外的分支(gap-fc-fc-sigm)来得到<strong>每个通道的[0, 1]权重</strong>，自适应地校正原各通道激活值响应。以提升有用的通道响应并抑制对当前任务用处不大的通道响应。</p>
+<p>这其实是一种<strong>通道注意力机制</strong>，因为不是每个通道的信息对结果都是同等重要的。</p>
+<img src="https://i.loli.net/2020/06/26/IzyaK6h785upLfs.jpg" srcset="/img/loading.gif" lazyload alt="preview" style="zoom:60%;" />
+
+<h2 id="MobileNet-和-ShuffleNet-轻量化网络"><a href="#MobileNet-和-ShuffleNet-轻量化网络" class="headerlink" title="MobileNet 和 ShuffleNet 轻量化网络"></a>MobileNet 和 ShuffleNet 轻量化网络</h2><p>在实际中应用，CNN受限于硬件运算能力与存储（比如几乎不可能在ARM芯片上跑ResNet-152）。<strong>所以必须有一种能在算法层面有效的压缩存储和计算量的方法。而MobileNet/ShuffleNet正为我们打开这扇窗。</strong></p>
+<p>谈论起MoblieNet / ShuffleNet这些网络结构，就绕不开<strong>分组卷积 Group convolution</strong>，甚至可以认为这些网络结构只是Group convolution的变形而已。（不了解分组卷积的请移步到问题 “ 48_各种卷积方式串讲.md “）。<u>分组卷积可以大大减少参数量和计算量</u>。</p>
+<p>其实我们上面在讲 AlexNet 的时候说到多 GPU 训练，其实便用到了分组卷积这个操作，将整个网络分成了两组。</p>
+<h3 id="MobileNet-v1"><a href="#MobileNet-v1" class="headerlink" title="MobileNet v1"></a>MobileNet v1</h3><p>Mobilenet  v1是Google于2017年发布的网络架构，旨在充分利用移动设备和嵌入式应用的有限的资源，有效地最大化模型的准确性，以满足有限资源下的各种应用案例。Mobilenet v1也可以像其他流行模型（如VGG，ResNet）一样用于分类、检测、嵌入和分割等任务提取图像卷积特征。</p>
+<p>Mobilenet v1核心是把卷积拆分为 Depthwise + Pointwise 两部分。</p>
+<p><strong>Depthwise</strong> 是对 $N<em>C</em>H<em>W$ 的输入进行 group = C 的分组卷积，每一组做 kernel = 3x3，pad = 1，stride = 1 的卷积，因此输出仍然为  $N</em>C<em>H</em>W$ 。这样相当于收集了每个Channel的空间特征，即Depthwise特征。</p>
+<p><strong>Pointwise</strong> 是对 $N<em>C</em>H<em>W$ 的输入进行 k 个普通的 1x1 卷积，收集每个点的特征，最终输出为 $N</em>k<em>H</em>W$ 。</p>
+<blockquote>
+<p>Depthwise只提取通道内部的特征，但是通道与通道间信息是相互隔离的；而Pointwise通过提取每个点的特征，对每个通道间的信息进行交换。Depthwise+Pointwise相当于把普通卷积分为了2个步骤而已。</p>
+</blockquote>
+<p>下面作图为普通的卷积，右图为MobileNet 中的卷积。</p>
+<p><img src="https://i.loli.net/2020/06/26/pSbxWTAD9dhG28R.jpg" srcset="/img/loading.gif" lazyload alt="preview"></p>
+<p>MobileNet v2 简化来说就是在 v1 基础上引入了 residual 结构，所以就不展开了。</p>
+<h3 id="ShuffleNet-v1"><a href="#ShuffleNet-v1" class="headerlink" title="ShuffleNet v1"></a>ShuffleNet v1</h3><p>ShuffleNet是Face++提出的一种轻量化网络结构，主要思路是使用Group convolution和Channel shuffle改进ResNet，可以看作是ResNet的压缩版本。</p>
+<p>这里再回顾一下ResNet的bottleneck网络结构，如图13。注意Channel维度变化：256D-64D-256D ，宛如一个中间细两端粗的瓶颈，所以称为“bottleneck”。这种结构相比VGG，早已经被证明是非常效的，能够更好的提取图像特征。</p>
+<p>下图展示了ShuffleNet的结构，其中(a)就是加入Depthwise的ResNet bottleneck结构，而(b)和(c)是加入Group convolution和Channel Shuffle的ShuffleNet的结构。</p>
+<p><img src="https://i.loli.net/2020/06/26/MoIS3rdkn7mc2JV.jpg" srcset="/img/loading.gif" lazyload alt="preview"></p>
+<p>如同上面的 MobileNet ，ShuffleNet 也可以减少参数量和计算量。但为什么要引入Channel Shuffle操作呢？</p>
+<blockquote>
+<p>ShuffleNet的本质是将卷积运算限制在每个Group内，这样模型的计算量取得了显著的下降。然而导致模型的信息流限制在各个Group内，组与组之间没有信息交换，这会影响模型的表示能力。因此，需要引入组间信息交换的机制，即Channel Shuffle操作。同时Channel Shuffle是可导的，可以实现end-to-end一次性训练网络。</p>
+</blockquote>
+<p>下面详细讲解下 channel shuffle 具体是怎么实现的：</p>
+<p><img src="https://i.loli.net/2020/06/26/CBwYdqiphJEKubj.jpg" srcset="/img/loading.gif" lazyload alt="preview"></p>
+<p>假设输入的 feature map 有 9 个 channels，groups = 3，分成三组：</p>
+<p><img src="https://i.loli.net/2020/06/26/yVIHSDuQmas8YcJ.png" srcset="/img/loading.gif" lazyload></p>
+<p>第一步进行 reshape：</p>
+<p><img src="https://i.loli.net/2020/06/26/dYhxHE47w8VvDcz.png" srcset="/img/loading.gif" lazyload></p>
+<p>第二步对得到的矩阵进行矩阵转置操作：</p>
+<p><img src="https://i.loli.net/2020/06/26/iAmkJhR1H3PBfEu.png" srcset="/img/loading.gif" lazyload></p>
+<p>最后再一次进行reshape操作：</p>
+<p><img src="https://i.loli.net/2020/06/26/rWiAq9ojelUF1fT.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/31727402">(二)计算机视觉四大基本任务(分类、定位、检测、分割)</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/35405071">轻量化网络ShuffleNet MobileNet v1/v2 解析</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_23388287/article/details/94456951">Tensorflow笔记——channel shuffle的实现</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" class="category-chain-item">深度学习基础</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%BD%AC%E8%BD%BD/">#转载</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>15-CNN分类网络发展历程</div>
+      <div>https://kongyan66.github.io/2022/11/22/深度学习基础/15_简述CNN分类网络的演变脉络及各自的贡献与特点/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>孔言</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年11月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/11/23/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/18_%E7%89%B9%E5%BE%81%E8%9E%8D%E5%90%88concat%E5%92%8Cadd%E7%9A%84%E5%8C%BA%E5%88%AB/" title="18—concat与add区别">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">18—concat与add区别</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/11/22/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/16_%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8F1-score/" title="16—为什么用F1-Score？">
+                        <span class="hidden-mobile">16—为什么用F1-Score？</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访问客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

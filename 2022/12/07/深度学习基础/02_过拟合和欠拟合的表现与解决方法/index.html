@@ -16,24 +16,26 @@
   <meta name="author" content="孔言">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这是一篇测试文章">
+    <meta name="description" content="问题过拟合和欠拟合的表现和解决方法。 其实除了欠拟合和过拟合，还有一种是适度拟合，适度拟合就是我们模型训练想要达到的状态，不过适度拟合这个词平时真的好少见，在做酷狗音乐的笔试题时还懵逼了一会，居然还真的有这样的说法。 这应该是基础中的基础了，笔试题都做烂了。那就当做今天周末，继续放个假吧……  过拟合过拟合的表现模型在训练集上的表现非常好，但是在测试集、验证集以及新数据上的表现很差，损失曲线呈现一">
 <meta property="og:type" content="article">
-<meta property="og:title" content="测试文章">
-<meta property="og:url" content="https://kongyan66.github.io/2022/12/05/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/index.html">
+<meta property="og:title" content="02—过拟合与欠拟合表现与解决方法">
+<meta property="og:url" content="https://kongyan66.github.io/2022/12/07/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/02_%E8%BF%87%E6%8B%9F%E5%90%88%E5%92%8C%E6%AC%A0%E6%8B%9F%E5%90%88%E7%9A%84%E8%A1%A8%E7%8E%B0%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="孔言的博客">
-<meta property="og:description" content="这是一篇测试文章">
+<meta property="og:description" content="问题过拟合和欠拟合的表现和解决方法。 其实除了欠拟合和过拟合，还有一种是适度拟合，适度拟合就是我们模型训练想要达到的状态，不过适度拟合这个词平时真的好少见，在做酷狗音乐的笔试题时还懵逼了一会，居然还真的有这样的说法。 这应该是基础中的基础了，笔试题都做烂了。那就当做今天周末，继续放个假吧……  过拟合过拟合的表现模型在训练集上的表现非常好，但是在测试集、验证集以及新数据上的表现很差，损失曲线呈现一">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://kongyan66.github.io/2022/12/05/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png">
-<meta property="article:published_time" content="2022-12-05T13:24:17.000Z">
-<meta property="article:modified_time" content="2022-12-05T13:28:56.389Z">
+<meta property="og:image" content="https://i.loli.net/2020/05/16/m1MXWUG6RZEfB2H.jpg">
+<meta property="og:image" content="https://i.loli.net/2020/05/16/dNxegZrbA6GUwPp.png">
+<meta property="og:image" content="https://i.loli.net/2020/05/16/N2v1dDnKqfk7iQs.png">
+<meta property="article:published_time" content="2022-12-07T03:24:17.000Z">
+<meta property="article:modified_time" content="2022-12-18T12:33:52.847Z">
 <meta property="article:author" content="孔言">
-<meta property="article:tag" content="原创">
+<meta property="article:tag" content="转载">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://kongyan66.github.io/2022/12/05/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/16/m1MXWUG6RZEfB2H.jpg">
   
   
   
-  <title>测试文章 - 孔言的博客</title>
+  <title>02—过拟合与欠拟合表现与解决方法 - 孔言的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -216,7 +218,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="测试文章"></span>
+            <span id="subtitle" data-typed-text="02—过拟合与欠拟合表现与解决方法"></span>
           
         </div>
 
@@ -227,8 +229,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-12-05 21:24" pubdate>
-          2022年12月5日 晚上
+        <time datetime="2022-12-07 11:24" pubdate>
+          2022年12月7日 上午
         </time>
       </span>
     
@@ -239,7 +241,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8 字
+          2.4k 字
         
       </span>
     
@@ -250,7 +252,7 @@
         
         
         
-          1 分钟
+          20 分钟
         
       </span>
     
@@ -296,13 +298,58 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">测试文章</h1>
+            <h1 style="display: none">02—过拟合与欠拟合表现与解决方法</h1>
             
             
               <div class="markdown-body">
                 
-                <p>这是一篇测试文章</p>
-<p><img src="%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/test.png" srcset="/img/loading.gif" lazyload alt="图片引用方法二"></p>
+                <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>过拟合和欠拟合的表现和解决方法。</p>
+<p>其实除了欠拟合和过拟合，还有一种是<strong>适度拟合</strong>，适度拟合就是我们模型训练想要达到的状态，不过适度拟合这个词平时真的好少见，在做酷狗音乐的笔试题时还懵逼了一会，居然还真的有这样的说法。</p>
+<p>这应该是基础中的基础了，笔试题都做烂了。那就当做今天周末，继续放个假吧……</p>
+<p><img src="https://i.loli.net/2020/05/16/m1MXWUG6RZEfB2H.jpg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="过拟合"><a href="#过拟合" class="headerlink" title="过拟合"></a>过拟合</h2><h3 id="过拟合的表现"><a href="#过拟合的表现" class="headerlink" title="过拟合的表现"></a>过拟合的表现</h3><p>模型在训练集上的表现非常好，但是在测试集、验证集以及新数据上的表现很差，损失曲线呈现一种<strong>高方差</strong>状态。(高方差指的是训练集误差较低，而测试集误差比训练集大较多)</p>
+<img src="https://i.loli.net/2020/05/16/dNxegZrbA6GUwPp.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:150%;" />
+
+<h3 id="过拟合的原因"><a href="#过拟合的原因" class="headerlink" title="过拟合的原因"></a>过拟合的原因</h3><p>从两个角度去分析：</p>
+<ol>
+<li><strong>模型的复杂度</strong>：模型过于复杂，把噪声数据的特征也学习到模型中，导致模型泛化性能下降</li>
+<li><strong>数据集规模大小</strong>：数据集规模相对模型复杂度来说太小，使得模型过度挖掘数据集中的特征，把一些不具有代表性的特征也学习到了模型中。例如训练集中有一个叶子图片，该叶子的边缘是锯齿状，模型学习了该图片后认为叶子都应该有锯齿状边缘，因此当新数据中的叶子边缘不是锯齿状时，都判断为不是叶子。</li>
+</ol>
+<h3 id="过拟合的解决方法"><a href="#过拟合的解决方法" class="headerlink" title="过拟合的解决方法"></a>过拟合的解决方法</h3><ol>
+<li><p><strong>获得更多的训练数据</strong>：使用更多的训练数据是解决过拟合问题最有效的手段，因为更多的样本能够让模型学习到更多更有效的特征，减少噪声的影响。</p>
+<p>当然直接增加实验数据在很多场景下都是没那么容易的，因此可以通过<strong>数据扩充技术</strong>，例如对图像进行平移、旋转和缩放等等。</p>
+<p>除了根据原有数据进行扩充外，还有一种思路是使用非常火热的**生成式对抗网络 GAN **来合成大量的新训练数据。</p>
+<p>还有一种方法是使用<strong>迁移学习技术</strong>，使用已经在更大规模的源域数据集上训练好的模型参数来初始化我们的模型，模型往往可以更快地收敛。但是也有一个问题是，源域数据集中的场景跟我们目标域数据集的场景差异过大时，可能效果会不太好，需要多做实验来判断。</p>
+</li>
+<li><p><strong>降低模型复杂度</strong>：在深度学习中我们可以减少网络的层数，改用参数量更少的模型；在机器学习的决策树模型中可以降低树的高度、进行剪枝等。</p>
+</li>
+<li><p><strong>正则化方法</strong>如 L2 将权值大小加入到损失函数中，根据奥卡姆剃刀原理，拟合效果差不多情况下，模型复杂度越低越好。至于为什么正则化可以减轻过拟合这个问题可以看看<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37344125/article/details/104326946">这个博客</a>，挺好懂的.。</p>
+<p><strong>添加BN层</strong>（这个我们专门在BN专题中讨论过了，BN层可以一定程度上提高模型泛化性能）</p>
+<p>使用<strong>dropout技术</strong>（dropout在训练时会随机隐藏一些神经元，导致训练过程中不会每次都更新(<strong>预测时不会发生dropout</strong>)，最终的结果是每个神经元的权重w都不会更新的太大，起到了类似L2正则化的作用来降低过拟合风险。）</p>
+</li>
+<li><p><strong>Early Stopping</strong>：Early stopping便是一种迭代次数截断的方法来防止过拟合的方法，即在模型对训练数据集迭代收敛之前停止迭代来防止过拟合。</p>
+<p> Early stopping方法的具体做法是：在每一个Epoch结束时（一个Epoch集为对所有的训练数据的一轮遍历）计算validation data的accuracy，当accuracy不再提高时，就停止训练。这种做法很符合直观感受，因为accurary都不再提高了，在继续训练也是无益的，只会提高训练的时间。那么该做法的一个重点便是怎样才认为validation accurary不再提高了呢？并不是说validation accuracy一降下来便认为不再提高了，因为可能经过这个Epoch后，accuracy降低了，但是随后的Epoch又让accuracy又上去了，所以不能根据一两次的连续降低就判断不再提高。一般的做法是，在训练的过程中，记录到目前为止最好的validation accuracy，当连续10次Epoch（或者更多次）没达到最佳accuracy时，则可以认为accuracy不再提高了。</p>
+</li>
+<li><p><strong>集成学习方法</strong>：集成学习是把多个模型集成在一起，来降低单一模型的过拟合风险，例如Bagging方法。</p>
+<p>如DNN可以用Bagging的思路来正则化。首先我们要对原始的m个训练样本进行有放回随机采样，构建N组m个样本的数据集，然后分别用这N组数据集去训练我们的DNN。即采用我们的前向传播算法和反向传播算法得到N个DNN模型的W,b参数组合，最后对N个DNN模型的输出用加权平均法或者投票法决定最终输出。不过用集成学习Bagging的方法有一个问题，就是我们的DNN模型本来就比较复杂，参数很多。现在又变成了N个DNN模型，这样参数又增加了N倍，从而导致训练这样的网络要花更加多的时间和空间。因此一般N的个数不能太多，比如5-10个就可以了。</p>
+</li>
+<li><p><strong>交叉检验</strong>，如S折交叉验证，通过交叉检验得到较优的模型参数，其实这个跟上面的Bagging方法比较类似，只不过S折交叉验证是随机将已给数据切分成S个互不相交的大小相同的自己，然后利用S-1个子集的数据训练模型，利用余下的子集测试模型；将这一过程对可能的S种选择重复进行；最后选出S次评测中平均测试误差最小的模型。</p>
+</li>
+</ol>
+<h2 id="欠拟合"><a href="#欠拟合" class="headerlink" title="欠拟合"></a>欠拟合</h2><h3 id="欠拟合的表现"><a href="#欠拟合的表现" class="headerlink" title="欠拟合的表现"></a>欠拟合的表现</h3><p>模型无论是在训练集还是在测试集上的表现都很差，损失曲线呈现一种<strong>高偏差</strong>状态。（高偏差指的是训练集和验证集的误差都较高，但相差很少）</p>
+<img src="https://i.loli.net/2020/05/16/N2v1dDnKqfk7iQs.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:150%;" />
+
+<h3 id="欠拟合的原因"><a href="#欠拟合的原因" class="headerlink" title="欠拟合的原因"></a>欠拟合的原因</h3><p>同样可以从两个角度去分析：</p>
+<ol>
+<li><strong>模型过于简单</strong>：简单模型的学习能力比较差</li>
+<li><strong>提取的特征不好</strong>：当特征不足或者现有特征与样本标签的相关性不强时，模型容易出现欠拟合</li>
+</ol>
+<h3 id="欠拟合的解决方法"><a href="#欠拟合的解决方法" class="headerlink" title="欠拟合的解决方法"></a>欠拟合的解决方法</h3><ol>
+<li><strong>增加模型复杂度</strong>：如线性模型增加高次项改为非线性模型、在神经网络模型中增加网络层数或者神经元个数、深度学习中改为使用参数量更多更先进的模型等等。</li>
+<li><strong>增加新特征</strong>：可以考虑特征组合等特征工程工作（这主要是针对机器学习而言，特征工程还真不太了解……）</li>
+<li>如果损失函数中加了正则项，可以考虑<strong>减小正则项的系数</strong> $\lambda$</li>
+</ol>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/f2489ccc14b4">过拟合与欠拟合及方差偏差</a>   (这个博客总结地很好，可以看看)<br><u>《百面机器学习》</u><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012197749/article/details/79766317">机器学习+过拟合和欠拟合+方差和偏差</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/GL3_24/article/details/90294490">如何判断欠拟合、适度拟合、过拟合</a></p>
 
                 
               </div>
@@ -321,7 +368,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/python/" class="category-chain-item">python</a>
+  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" class="category-chain-item">深度学习基础</a>
   
   
 
@@ -336,7 +383,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%8E%9F%E5%88%9B/">#原创</a>
+        <a href="/tags/%E8%BD%AC%E8%BD%BD/">#转载</a>
       
     </div>
   
@@ -348,8 +395,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>测试文章</div>
-      <div>https://kongyan66.github.io/2022/12/05/测试文章/</div>
+      <div>02—过拟合与欠拟合表现与解决方法</div>
+      <div>https://kongyan66.github.io/2022/12/07/深度学习基础/02_过拟合和欠拟合的表现与解决方法/</div>
     </div>
     <div class="license-meta">
       
@@ -361,7 +408,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年12月5日</div>
+          <div>2022年12月7日</div>
         </div>
       
       
@@ -393,9 +440,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/12/06/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/01_%E4%B8%89%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/" title="01—三种常见激活函数">
+                      <a href="/2022/12/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/03_%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E5%8D%B7%E7%A7%AF%E6%93%8D%E4%BD%9C/" title="03-代码实现卷积操作">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">01—三种常见激活函数</span>
+                        <span class="hidden-mobile">03-代码实现卷积操作</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -403,8 +450,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/12/05/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/hello-world/" title="Hello World">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2022/12/06/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/01_%E4%B8%89%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/" title="01—三种常见激活函数">
+                        <span class="hidden-mobile">01—三种常见激活函数</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

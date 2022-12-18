@@ -19,7 +19,7 @@
     <meta name="description" content="孔言的个人博客">
 <meta property="og:type" content="website">
 <meta property="og:title" content="孔言的博客">
-<meta property="og:url" content="https://kongyan66.github.io/index.html">
+<meta property="og:url" content="https://kongyan66.github.io/page/2/index.html">
 <meta property="og:site_name" content="孔言的博客">
 <meta property="og:description" content="孔言的个人博客">
 <meta property="og:locale" content="zh_CN">
@@ -243,15 +243,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/12/12/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/06_Pooling%E5%B1%82%E7%9A%84%E4%BD%9C%E7%94%A8%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/" target="_self">
-          06-Pooling层的作用及如何反向传播
+        <a href="/2022/11/23/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/18_%E7%89%B9%E5%BE%81%E8%9E%8D%E5%90%88concat%E5%92%8Cadd%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
+          18—concat与add区别
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/12/12/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/06_Pooling%E5%B1%82%E7%9A%84%E4%BD%9C%E7%94%A8%E4%BB%A5%E5%8F%8A%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/23/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/18_%E7%89%B9%E5%BE%81%E8%9E%8D%E5%90%88concat%E5%92%8Cadd%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
         <div>
-          问题CNN网络在反向传播中需要逐层向前求梯度，然而pooling层没有可学习的参数，那它是如何进行反向传播的呢？ 此外，CNN中为什么要加pooling层，它的作用是什么？ Pooling层CNN一般采用average pooling或max pooling来进行池化操作，而池化操作会改变feature map的大小，例如大小为64×64的feature map使用2×2的步长池化后，featur
+          问题在网络模型当中，经常要进行不同通道特征图的信息融合相加操作，以整合不同通道的信息，在具体实现方面特征的融合方式一共有两种，一种是 ResNet 和 FPN 等当中采用的 element-wise add ，另一种是 DenseNet 等中采用的 concat 。他们之间有什么区别呢？ add举个例子： 123a = [[1,2], [3, 4]]b =  [[11,12], [13, 14]]
         </div>
       </a>
 
@@ -259,8 +259,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-12-12 20:24" pubdate>
-              2022-12-12
+            <time datetime="2022-11-23 20:24" pubdate>
+              2022-11-23
             </time>
           </div>
         
@@ -304,15 +304,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/12/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/05_ReLU%E5%87%BD%E6%95%B0%E5%9C%A80%E5%A4%84%E4%B8%8D%E5%8F%AF%E5%AF%BC%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E7%94%A8/" target="_self">
-          05-RelU在0处不可导，为何还能用？
+        <a href="/2022/11/22/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/15_%E7%AE%80%E8%BF%B0CNN%E5%88%86%E7%B1%BB%E7%BD%91%E7%BB%9C%E7%9A%84%E6%BC%94%E5%8F%98%E8%84%89%E7%BB%9C%E5%8F%8A%E5%90%84%E8%87%AA%E7%9A%84%E8%B4%A1%E7%8C%AE%E4%B8%8E%E7%89%B9%E7%82%B9/" target="_self">
+          15-CNN分类网络发展历程
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/12/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/05_ReLU%E5%87%BD%E6%95%B0%E5%9C%A80%E5%A4%84%E4%B8%8D%E5%8F%AF%E5%AF%BC%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E7%94%A8/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/22/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/15_%E7%AE%80%E8%BF%B0CNN%E5%88%86%E7%B1%BB%E7%BD%91%E7%BB%9C%E7%9A%84%E6%BC%94%E5%8F%98%E8%84%89%E7%BB%9C%E5%8F%8A%E5%90%84%E8%87%AA%E7%9A%84%E8%B4%A1%E7%8C%AE%E4%B8%8E%E7%89%B9%E7%82%B9/" target="_self">
         <div>
-          问题ReLU函数在0处不可导，为什么在深度学习网络中还这么常用? 问题背景这是在阿里的机器学习岗一面的时候问的一个问题，最开始的问题是“为什么机器学习中解决回归问题的时候一般使用平方损失（即均方误差）？”。 当时我的回答是损失函数是是模型预测值与真实值之间的一种距离度量，我们可以计算出每个样本的预测值与真实值之间的距离，全部加起来就得到了所谓的损失函数。而距离的度量可以采用预测值与真实值之间差的绝
+          问题简述CNN分类网络的演变脉络及各自的贡献与特点 综述深度学习的浪潮就是从CNN开始的，它结构形态的变化也见证着这门技术的发展。现在涌进来学习深度学习的大部分人都是做计算机视觉的，因为这个门槛相对较低，业界数据集开源了很多，也比较直观，而且对硬件设备的要求也没以前那么大，导致现在就业竞争非常大。CV各种任务的网络结构变形更是日新月异，让人眼花缭乱，但是不管怎么变，基本都是基于卷积、池化和全连接这
         </div>
       </a>
 
@@ -320,8 +320,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-12-10 20:24" pubdate>
-              2022-12-10
+            <time datetime="2022-11-22 20:24" pubdate>
+              2022-11-22
             </time>
           </div>
         
@@ -365,15 +365,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/12/09/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/04_BN%E5%B1%82%E7%9A%84%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3/" target="_self">
-          04-BN层的深入理解
+        <a href="/2022/11/22/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/16_%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8F1-score/" target="_self">
+          16—为什么用F1-Score？
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/12/09/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/04_BN%E5%B1%82%E7%9A%84%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/22/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/16_%E4%B8%BA%E4%BB%80%E4%B9%88%E7%94%A8F1-score/" target="_self">
         <div>
-          问题BN在深度网络训练过程中是非常好用的trick，在笔试中也很常考，而之前只是大概知道它的作用，很多细节并不清楚，因此希望用这篇文章彻底解决揭开BN的面纱。 BN层的由来与概念讲解BN之前，我们需要了解BN是怎么被提出的。在机器学习领域，数据分布是很重要的概念。如果训练集和测试集的分布很不相同，那么在训练集上训练好的模型，在测试集上应该不奏效（比如用ImageNet训练的分类网络去在灰度医学图像
+          问题为什么使用F1 score？（这里主要讨论为何使用 F1 score 而不是算术平均） F1 scoreF1 score是分类问题中常用的评价指标，定义为精确率（Precision）和召回率（Recall）的调和平均数。$$F1=\frac{1}{\frac{1}{Precision}+\frac{1}{Recall}}=\frac{2×Precision×Recall}{Precision+
         </div>
       </a>
 
@@ -381,8 +381,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-12-09 20:24" pubdate>
-              2022-12-09
+            <time datetime="2022-11-22 20:24" pubdate>
+              2022-11-22
             </time>
           </div>
         
@@ -426,15 +426,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/12/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/03_%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E5%8D%B7%E7%A7%AF%E6%93%8D%E4%BD%9C/" target="_self">
-          03-代码实现卷积操作
+        <a href="/2022/11/21/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/14_%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%E4%B8%AD%E7%9A%84%E5%8D%B7%E7%A7%AF%E4%B8%8E%E4%BA%92%E7%9B%B8%E5%85%B3%E7%9A%84%E9%82%A3%E7%82%B9%E4%BA%8B/" target="_self">
+          14-卷积与互相关的联系
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/12/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/03_%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E5%8D%B7%E7%A7%AF%E6%93%8D%E4%BD%9C/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/21/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/14_%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%E4%B8%AD%E7%9A%84%E5%8D%B7%E7%A7%AF%E4%B8%8E%E4%BA%92%E7%9B%B8%E5%85%B3%E7%9A%84%E9%82%A3%E7%82%B9%E4%BA%8B/" target="_self">
         <div>
-          问题写代码实现卷积操作 问题背景一次面试失败得来的深刻教训，自己的学习太不扎实了，理论基础薄弱，一来真格就不会。其实这个问题之前在看面经的时候就有说到过，虽然理论弄明白了，但还是心存侥幸没有动手把代码写出来…… 问题解答传统卷积运算是将卷积核以滑动窗口的方式在输入图上滑动，当前窗口内对应元素相乘然后求和得到结果，一个窗口一个结果。相乘然后求和恰好也是向量内积的计算方式，所以可以将每个窗口内的元素拉
+          卷积层的来源与作用深度学习的计算机视觉是基于卷积神经网络实现的，卷积神经网络的与传统的神经网络（可以理解为多层感知机）的主要区别是卷积神经网络中除了全连接层外还有卷积层和pooling层等。 卷积层算是图像处理中非常基础的东西，它其实也是全连接层演变来的，卷积可视为局部连接和共享参数的全连接层。 局部连接：在全连接层中，每个输出通过权值(weight)和所有输入相连。而在视觉识别中，关键性的图像特
         </div>
       </a>
 
@@ -442,8 +442,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-12-08 20:24" pubdate>
-              2022-12-08
+            <time datetime="2022-11-21 20:24" pubdate>
+              2022-11-21
             </time>
           </div>
         
@@ -487,15 +487,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/12/07/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/02_%E8%BF%87%E6%8B%9F%E5%90%88%E5%92%8C%E6%AC%A0%E6%8B%9F%E5%90%88%E7%9A%84%E8%A1%A8%E7%8E%B0%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" target="_self">
-          02—过拟合与欠拟合表现与解决方法
+        <a href="/2022/11/19/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/13_%E5%BC%84%E6%98%8E%E7%99%BD%E6%84%9F%E5%8F%97%E9%87%8E%E5%A4%A7%E5%B0%8F%E7%9A%84%E8%AE%A1%E7%AE%97%E9%97%AE%E9%A2%98/" target="_self">
+          13-感受野如何计算?
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/12/07/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/02_%E8%BF%87%E6%8B%9F%E5%90%88%E5%92%8C%E6%AC%A0%E6%8B%9F%E5%90%88%E7%9A%84%E8%A1%A8%E7%8E%B0%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/19/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/13_%E5%BC%84%E6%98%8E%E7%99%BD%E6%84%9F%E5%8F%97%E9%87%8E%E5%A4%A7%E5%B0%8F%E7%9A%84%E8%AE%A1%E7%AE%97%E9%97%AE%E9%A2%98/" target="_self">
         <div>
-          问题过拟合和欠拟合的表现和解决方法。 其实除了欠拟合和过拟合，还有一种是适度拟合，适度拟合就是我们模型训练想要达到的状态，不过适度拟合这个词平时真的好少见，在做酷狗音乐的笔试题时还懵逼了一会，居然还真的有这样的说法。 这应该是基础中的基础了，笔试题都做烂了。那就当做今天周末，继续放个假吧……  过拟合过拟合的表现模型在训练集上的表现非常好，但是在测试集、验证集以及新数据上的表现很差，损失曲线呈现一
+          感受野Receptive field (RF)的概念卷及神经网络中每一层输出的特征图(feature map)中的每一个像素映射到原始输入图像的区域大小。 卷积输入输出的大小关系根据感受野的概念，大家可以体会到感受野的计算应该与卷积的计算是相反的过程，所以先回顾下卷积输入输出的大小关系公式：（以高度为例）$$Height_{out} = (Height_{in} - F+2*P)/S + 1$$其
         </div>
       </a>
 
@@ -503,8 +503,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-12-07 11:24" pubdate>
-              2022-12-07
+            <time datetime="2022-11-19 20:24" pubdate>
+              2022-11-19
             </time>
           </div>
         
@@ -548,15 +548,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/12/06/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/01_%E4%B8%89%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/" target="_self">
-          01—三种常见激活函数
+        <a href="/2022/11/18/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/12_CNN%E5%9C%A8%E5%9B%BE%E5%83%8F%E4%B8%8A%E8%A1%A8%E7%8E%B0%E5%A5%BD%E7%9A%84%E5%8E%9F%E5%9B%A0/" target="_self">
+          12-为什么CNN在CV领域表现优秀？
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/12/06/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/01_%E4%B8%89%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/18/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/12_CNN%E5%9C%A8%E5%9B%BE%E5%83%8F%E4%B8%8A%E8%A1%A8%E7%8E%B0%E5%A5%BD%E7%9A%84%E5%8E%9F%E5%9B%A0/" target="_self">
         <div>
-          问题在笔试问答题或面试中偶尔有涉及到激活函数的问题，这里简单总结一下深度学习中常见的三种激活函数sigmoid、tanh和ReLU，以及它们各自的特点和用途。 激活函数激活函数的作用是什么？激活函数的主要作用是在神经网络中引入非线性因素。 优秀激活函数具备的特性 非线性 可微 基于梯度优化必备特性 单调性  激活函数单调保证单层网络是凸函数，凸函数的局部最优解即为全局最优 计算简单 减少计算资源
+          问题一提到计算机视觉，第一反应就是 CNN ，但是大家有没有想过，为什么图像识别领域的网络结构都是使用的 CNN 呢，或者说 CNN 网络有哪些特点可以使其在图像识别领域表现良好？这个问题对于我们而言都习惯到理所当然了，所以面试官要是突然问这种问题，估计很多同学都得懵逼一会。 分析网上没有找着相关的问题答案，所以下面的分析仅仅是我个人的观点，大家交流交流，有其他见解的话非常欢迎提出来！ 为什么图像
         </div>
       </a>
 
@@ -564,8 +564,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-12-06 11:24" pubdate>
-              2022-12-06
+            <time datetime="2022-11-18 20:24" pubdate>
+              2022-11-18
             </time>
           </div>
         
@@ -609,15 +609,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/12/05/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/" target="_self">
-          测试文章
+        <a href="/2022/11/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/11_CNN%E7%BD%91%E7%BB%9C%E5%90%84%E7%A7%8D%E5%B1%82%E7%9A%84FLOPs%E5%92%8C%E5%8F%82%E6%95%B0%E9%87%8Fparas%E8%AE%A1%E7%AE%97/" target="_self">
+          11-FLops及Parameters计算
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/12/05/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/11_CNN%E7%BD%91%E7%BB%9C%E5%90%84%E7%A7%8D%E5%B1%82%E7%9A%84FLOPs%E5%92%8C%E5%8F%82%E6%95%B0%E9%87%8Fparas%E8%AE%A1%E7%AE%97/" target="_self">
         <div>
-          这是一篇测试文章
+          FLOPs 这里先注意一下FLOPs的写法，不要弄混了：**FLOPS(全大写)**：是floating point operations per second的缩写，意指每秒浮点运算次数，理解为计算速度，是一个衡量硬件性能的指标。**FLOPs(s小写)**：，是floating point operations的缩写（s表复数），意指浮点运算数，理解为计算量，可以用来衡量算法/模型的复杂度，也
         </div>
       </a>
 
@@ -625,102 +625,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-12-05 21:24" pubdate>
-              2022-12-05
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/python/" class="category-chain-item">python</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%8E%9F%E5%88%9B/">#原创</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/12/05/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/hello-world/" target="_self">
-          Hello World
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/12/05/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/hello-world/" target="_self">
-        <div>
-          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-12-05 20:42" pubdate>
-              2022-12-05
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/11/27/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/19_%E6%AD%A3%E5%88%99%E5%8C%96%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3/" target="_self">
-          19-正则化深入理解
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/27/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/19_%E6%AD%A3%E5%88%99%E5%8C%96%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3/" target="_self">
-        <div>
-          为什么需要正则化深度学习可能存在过拟合问题，有两个解决方法：1.正则化  2.准备更多的数据 我们无法时刻准备充足的样本数据，因为获取数据本身成本就很高，但正则化技术通常有助于避免过拟合或减少网络参数。 常见的正则化技术常见的机器学习算法的正则化方法有：L1正则化、L2正则化、Dropout、Early Stop、归一化（BN、IN、GN、LN）等 L1和L2正则化定义 正则化就是在原来损失函数的
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-11-27 20:24" pubdate>
-              2022-11-27
+            <time datetime="2022-11-17 20:24" pubdate>
+              2022-11-17
             </time>
           </div>
         
@@ -764,15 +670,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/11/24/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/17_%E5%90%84%E7%A7%8D%E5%8D%B7%E7%A7%AF%E6%96%B9%E5%BC%8F%E4%B8%B2%E8%AE%B2/" target="_self">
-          17-各种卷积操作串讲
+        <a href="/2022/11/16/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/10_%E4%BC%98%E5%8C%96%E5%99%A8%E5%8E%9F%E7%90%86%E5%8F%8A%E5%8F%91%E5%B1%95%E8%B7%AF%E7%BA%BF/" target="_self">
+          10-优化器原理及其发展
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/24/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/17_%E5%90%84%E7%A7%8D%E5%8D%B7%E7%A7%AF%E6%96%B9%E5%BC%8F%E4%B8%B2%E8%AE%B2/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/16/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/10_%E4%BC%98%E5%8C%96%E5%99%A8%E5%8E%9F%E7%90%86%E5%8F%8A%E5%8F%91%E5%B1%95%E8%B7%AF%E7%BA%BF/" target="_self">
         <div>
-          问题CNN 从 2012 年的 AlexNet 发展至今，各种网络结构层出不穷，尝试了几乎所有可能性的结构搭配以试图找到效果更好的那种，再通过结果去解释过程，这大概就是做深度学习的人的无奈之处吧，每天都有新论文发出，每天都会有新的网络结果，每个都比之前的提升一丢丢，琳琅满目，令人眼花缭乱，像我这样的便迷失其中，找不到一个确定的方向去研究，终究普普通通，无所建树。 网络结构如此，卷积 (Convol
+          问题深度学习中有很多优化函数，常见的那些你还记得它的定义以及优缺点吗？ 背景知识深度学习网络训练中，有很多可供选择的优化函数如SGD、Adam等等，到底用哪个好呢？其实这个问题没有确切的答案，优化函数是需要配合损失函数使用的，说白了，优化函数也是一种超参数，是需要尝试的，哪个效果好就用哪个…… 这些优化函数其实差别不大，都是基于一个基本框架来演进的，所以下面先介绍下优化算法的基本框架： １、优化算
         </div>
       </a>
 
@@ -780,8 +686,130 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-11-24 20:24" pubdate>
-              2022-11-24
+            <time datetime="2022-11-16 20:24" pubdate>
+              2022-11-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" class="category-chain-item">深度学习基础</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%BD%AC%E8%BD%BD/">#转载</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/11/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/09_%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BE%93%E5%85%A5%E7%BD%91%E7%BB%9C%E5%89%8D%E8%A6%81%E5%AF%B9%E5%9B%BE%E5%83%8F%E5%81%9A%E5%BD%92%E4%B8%80%E5%8C%96/" target="_self">
+          09-为什么输入网络要对图像作做归一化？
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/09_%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BE%93%E5%85%A5%E7%BD%91%E7%BB%9C%E5%89%8D%E8%A6%81%E5%AF%B9%E5%9B%BE%E5%83%8F%E5%81%9A%E5%BD%92%E4%B8%80%E5%8C%96/" target="_self">
+        <div>
+          问题在将图像输入到深度学习网络之前，一般先对图像进行预处理，即图像归一化，为什么需要这么做呢？ 问题背景在面试的时候，面试官先问的问题是“机器学习中为什么要做特征归一化”，我的回答是“特征归一化可以消除特征之间量纲不同的影响，不然分析出来的结果显然会倾向于数值差别比较大的特征，另外从梯度下降的角度理解，数据归一化后，最优解的寻优过程明显会变得平缓，更容易正确的收敛到最优解”。接着面试官又问“图像的
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-11-15 20:24" pubdate>
+              2022-11-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" class="category-chain-item">深度学习基础</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%BD%AC%E8%BD%BD/">#转载</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/11/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/08_softmax%E5%87%BD%E6%95%B0%E5%8F%8A%E6%B1%82%E5%AF%BC%E8%BF%87%E7%A8%8B/" target="_self">
+          08-softmax函数求导过程
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/11/14/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/08_softmax%E5%87%BD%E6%95%B0%E5%8F%8A%E6%B1%82%E5%AF%BC%E8%BF%87%E7%A8%8B/" target="_self">
+        <div>
+          问题今天小伙伴问会不会梯度求导，发现自己对离散变量求导并不熟悉，所以以somafmax为例子复习下，再进阶其实了解计算图了。 softmax函数softmax用于多分类过程中，它将多个神经元的输出，映射到（0,1）区间内，可以看成概率来理解，从而来进行多分类！ 假设我们有一个数组$Z$，$Z_i$表示$Z$中的第i个元素，那么这个元素的softmax值就是: ​
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-11-14 20:24" pubdate>
+              2022-11-14
             </time>
           </div>
         
@@ -823,7 +851,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
